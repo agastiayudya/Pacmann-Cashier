@@ -3,7 +3,7 @@ class Transaction:
         self.item_list = []
         self.item_total_price = 0
     
-    def add_item(self, item_name=None, quantity=None, price=None):
+    def add_item(self, item_name:str=None, quantity:int=None, price:float=None):
         try:
             if(item_name==None or quantity==None or price==None):
                 raise Exception("missing_field")
@@ -20,7 +20,7 @@ class Transaction:
             elif inst.args[0] == 'duplicate_item':
                 print('Sudah ada item dengan nama yang sama.')
 
-    def update_item_name(self, item_name=None, updated_name=None):
+    def update_item_name(self, item_name:str=None, updated_name:str=None):
         try:
             found_flag = False
             
@@ -42,7 +42,7 @@ class Transaction:
             elif inst.args[0] == 'not_found':
                 print('Item yang akan diperbaharui tidak ditemukan')
     
-    def update_item_quantity(self, item_name=None, updated_quantity=None):
+    def update_item_quantity(self, item_name:str=None, updated_quantity:int=None):
         try:
             found_flag = False
             
@@ -65,7 +65,7 @@ class Transaction:
             elif inst.args[0] == 'not_found':
                 print('Item yang akan diperbaharui tidak ditemukan')
 
-    def update_item_price(self, item_name=None, price=None):
+    def update_item_price(self, item_name:int=None, price:float=None):
         try:
             found_flag = False
             
@@ -88,7 +88,7 @@ class Transaction:
             elif inst.args[0] == 'not_found':
                 print('Item yang akan diperbaharui tidak ditemukan')
 
-    def delete_item(self, item_name=None):
+    def delete_item(self, item_name:str=None):
         try:
             found_flag = False
             
