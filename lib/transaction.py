@@ -16,7 +16,7 @@ class Transaction:
         except Exception as inst:
             if inst.args[0] == 'missing_field':
                 print('Pastikan memasukkan nama item, kuantitas, dan harga.')
-            if inst.args[0] == 'duplicate_item':
+            elif inst.args[0] == 'duplicate_item':
                 print('Sudah ada item dengan nama yang sama.')
 
     def update_item_name(self, item_name=None, updated_name=None):
@@ -38,7 +38,7 @@ class Transaction:
         except Exception as inst:
             if inst.args[0] == 'missing_field':
                 print('Pastikan memasukkan nama item dan nama yang akan diperbaharui.')
-            if inst.args[0] == 'not_found':
+            elif inst.args[0] == 'not_found':
                 print('Item yang akan diperbaharui tidak ditemukan')
     
     def update_item_quantity(self, item_name=None, updated_quantity=None):
@@ -60,7 +60,7 @@ class Transaction:
         except Exception as inst:
             if inst.args[0] == 'missing_field':
                 print('Pastikan memasukkan nama item dan kuantitas yang akan diperbaharui.')
-            if inst.args[0] == 'not_found':
+            elif inst.args[0] == 'not_found':
                 print('Item yang akan diperbaharui tidak ditemukan')
 
     def update_item_price(self, item_name=None, price=None):
@@ -82,5 +82,36 @@ class Transaction:
         except Exception as inst:
             if inst.args[0] == 'missing_field':
                 print('Pastikan memasukkan nama item dan harga yang akan diperbaharui.')
-            if inst.args[0] == 'not_found':
+            elif inst.args[0] == 'not_found':
                 print('Item yang akan diperbaharui tidak ditemukan')
+
+    def delete_item(self, item_name=None):
+        try:
+            found_flag = False
+            
+            if(item_name==None):
+                raise Exception('missing_field')
+            
+            for item in self.item_list:
+                if item['name'] == item_name:
+                    self.item_list.remove(item)
+                    found_flag = True
+                    break
+                
+            if(not found_flag):
+                raise Exception('not_found')
+
+        except Exception as inst:
+            if inst.args[0] == 'missing_field':
+                print('Pastikan memasukkan nama item yang akan dihapus.')
+                
+            elif inst.args[0] == 'not_found':
+                print('Item yang akan dihapus tidak ditemukan.')
+                
+    def reset_transaction(self):
+        try:
+            self.item_list = []
+
+        except:
+            print('Terdapat kesalahan saat me-reset transaksi.')
+                
