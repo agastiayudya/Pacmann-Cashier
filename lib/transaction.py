@@ -1,6 +1,7 @@
 class Transaction:
     def __init__(self):
         self.item_list = []
+        self.item_total_price = 0
     
     def add_item(self, item_name=None, quantity=None, price=None):
         try:
@@ -12,7 +13,7 @@ class Transaction:
                     raise Exception('duplicate_item')
             
             self.item_list.append({'name':item_name, 'quantity':quantity, 'price':price})
-            
+            self.total_price()
         except Exception as inst:
             if inst.args[0] == 'missing_field':
                 print('Pastikan memasukkan nama item, kuantitas, dan harga.')
@@ -52,6 +53,7 @@ class Transaction:
                 if item['name'] == item_name:
                     item['quantity'] = updated_quantity
                     found_flag = True
+                    self.total_price()
                     break
                 
             if(not found_flag):
@@ -74,6 +76,7 @@ class Transaction:
                 if item['name'] == item_name:
                     item['price'] = price
                     found_flag = True
+                    self.total_price()
                     break
                 
             if(not found_flag):
@@ -96,6 +99,7 @@ class Transaction:
                 if item['name'] == item_name:
                     self.item_list.remove(item)
                     found_flag = True
+                    self.total_price()
                     break
                 
             if(not found_flag):
@@ -111,6 +115,7 @@ class Transaction:
     def reset_transaction(self):
         try:
             self.item_list = []
+            self.total_price()
 
         except:
             print('Terdapat kesalahan saat me-reset transaksi.')
@@ -138,3 +143,17 @@ class Transaction:
         except Exception as inst:
             if inst.args[0] == 'missing_property':
                 print('Pemesanan salah. Terdapat Item yang belum memiliki informasi lengkap.')
+
+    def total_price(self):
+        self.item_total_price = 0
+        
+        if(len(self.item_list) > 0):
+            for item in self.item_list:
+                self.item_total_price += item['quantity'] * item['price']
+        
+        if self.item_total_price > 500000:
+           self.item_total_price *= (1.0 - 0.10)
+        elif self.item_total_price > 300000:
+           self.item_total_price *= (1.0 - 0.08)
+        elif self.item_total_price > 200000:
+           self.item_total_price *= (1.0 - 0.05)
