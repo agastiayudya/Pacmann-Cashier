@@ -1,9 +1,37 @@
 class Transaction:
+    """
+        Class untuk merepresentasikan setiap transaksi yang dilakukan di kasir.
+        
+        Property:
+            - item_list = Daftar item yang dimasukkan di transaksi terkait
+            - item_total_price = Total harga keseluruhan item
+        
+        Method:
+            - add_item = Menambahkan item ke 'item_list'
+            - update_item_name = Memperbaharui nama item yang terdapat pada 'item_list'
+            - update_item_quantity = Memperbaharui kuantitas item yang terdapat pada 'item_list'
+            - update_item_price = Memperbaharui harga item yang terdapat pada 'item_list'
+            - delete_item = Menghapus item yang terdapat pada 'item_list'
+            - reset_transaction = Menghapus seluruh item pada 'item_list'
+            - check_order = Mengecek dan menampilkan item pada 'item_list'
+            - total_price = Menghitung total harga dan menyimpan pada 'item_total_price'
+    """
+    
     def __init__(self):
         self.item_list = []
         self.item_total_price = 0
     
     def add_item(self, item_name:str=None, quantity:int=None, price:float=None):
+        """
+            Menambahkan item pada 'item_list'
+            
+            Parameters:
+                - item_name: string = Nama item yang akan ditambahkan
+                - quantity: integer = Kuantitas item yang akan ditambahkan
+                - price: float = Harga item yang akan ditambahkan
+            
+            Return: None
+        """
         try:
             if(item_name==None or quantity==None or price==None):
                 raise Exception("missing_field")
@@ -21,6 +49,15 @@ class Transaction:
                 print('Sudah ada item dengan nama yang sama.')
 
     def update_item_name(self, item_name:str=None, updated_name:str=None):
+        """
+            Memperbaharui nama item yang terdapat pada 'item_list'. Pencocokan item didasarkan pada nama item.
+            
+            Parameters:
+                - item_name: string = Nama item yang akan diperbaharui
+                - updated_name: string = Nama baru dari item yang dipilih
+            
+            Return: None
+        """
         try:
             found_flag = False
             
@@ -43,6 +80,16 @@ class Transaction:
                 print('Item yang akan diperbaharui tidak ditemukan')
     
     def update_item_quantity(self, item_name:str=None, updated_quantity:int=None):
+        """
+            Memperbaharui kuantitas item yang terdapat pada 'item_list'. Pencocokan item didasarkan pada nama item.
+            
+            Parameters:
+                - item_name: string = Nama item yang akan diperbaharui
+                - updated_quantity: integer = Kuantitas baru dari item yang dipilih
+            
+            Return: None
+        """
+        
         try:
             found_flag = False
             
@@ -66,6 +113,16 @@ class Transaction:
                 print('Item yang akan diperbaharui tidak ditemukan')
 
     def update_item_price(self, item_name:int=None, price:float=None):
+        """
+            Memperbaharui harga item yang terdapat pada 'item_list'. Pencocokan item didasarkan pada nama item.
+            
+            Parameters:
+                - item_name: string = Nama item yang akan diperbaharui
+                - price: integer = Harga baru dari item yang dipilih
+            
+            Return: None
+        """
+        
         try:
             found_flag = False
             
@@ -89,6 +146,14 @@ class Transaction:
                 print('Item yang akan diperbaharui tidak ditemukan')
 
     def delete_item(self, item_name:str=None):
+        """
+            Menghapus item yang terdapat pada 'item_list' berdasarkan nama item.
+            
+            Parameters:
+                - item_name: string = Nama item yang akan dihapus
+            
+            Return: None
+        """
         try:
             found_flag = False
             
@@ -113,6 +178,14 @@ class Transaction:
                 print('Item yang akan dihapus tidak ditemukan.')
                 
     def reset_transaction(self):
+        """
+            Menghapus seluruh item pada 'item_list', mengembalikan 'item_total_price' menjadi 0.
+            
+            Parameters: None
+            
+            Return: None
+        """
+        
         try:
             self.item_list = []
             self.total_price()
@@ -122,6 +195,14 @@ class Transaction:
                 
                 
     def check_order(self):
+        """
+            Mengecek dan menampilkan seluruh item pada 'item_list'. Item dicek berdasarkan ketersediaan property 'name', 'quantity', dan 'price' pada tiap item.
+            
+            Parameters: None
+            
+            Return: None
+        """
+        
         try:
             missing_property_flag = False
             
@@ -145,6 +226,14 @@ class Transaction:
                 print('Pemesanan salah. Terdapat Item yang belum memiliki informasi lengkap.')
 
     def total_price(self):
+        """
+            Menghitung total harga dari seluruh item pada item_list dan menghitung diskon berdasarkan aturan yang telah ditetapkan.
+            Hasil perhitungan akan disimpan pada 'item_total_price'.
+            
+            Parameters: None
+            
+            Return: None
+        """
         self.item_total_price = 0
         
         if(len(self.item_list) > 0):
