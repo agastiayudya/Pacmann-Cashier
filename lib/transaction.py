@@ -115,3 +115,26 @@ class Transaction:
         except:
             print('Terdapat kesalahan saat me-reset transaksi.')
                 
+                
+    def check_order(self):
+        try:
+            missing_property_flag = False
+            
+            headers = ['Nama Item', 'Jumlah Item', 'Harga/Item', 'Total Harga']
+            print("{:<20} | {:<15} | {:<15} | {:<10}".format(headers[0], headers[1], headers[2], headers[3]))
+            print("-" * 70)
+
+            for item in self.item_list:
+                if('name' not in item or 'quantity' not in item or 'price' not in item):
+                    missing_property_flag = True
+                else:
+                    print("{:<20} | {:<15} | {:<15} | {:<10}".format(item['name'], item['quantity'], item['price'], item['quantity'] * item['price']))
+                    
+            if(missing_property_flag):
+                raise Exception("missing_property")
+            else:
+                print("Pemesanan sudah benar.")
+
+        except Exception as inst:
+            if inst.args[0] == 'missing_property':
+                print('Pemesanan salah. Terdapat Item yang belum memiliki informasi lengkap.')
