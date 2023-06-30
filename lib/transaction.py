@@ -132,8 +132,8 @@ class Transaction:
             for item in self.item_list:
                 if('name' not in item or 'quantity' not in item or 'price' not in item):
                     missing_property_flag = True
-                else:
-                    print("{:<20} | {:<15} | {:<15} | {:<10}".format(item['name'], item['quantity'], item['price'], item['quantity'] * item['price']))
+                    
+                print("{:<20} | {:<15} | {:<15} | {:<10}".format(item['name'], item['quantity'], item['price'], item['quantity'] * item['price']))
                     
             if(missing_property_flag):
                 raise Exception("missing_property")
